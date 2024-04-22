@@ -181,6 +181,7 @@ function Conversation({
         disabledInput={disabledInput}
         autofocus={autofocus}
         onTextInputChange={onTextInputChange}
+        showEmoji={emojis ?? false}
         buttonAlt={sendButtonAlt}
         onPressEmoji={togglePicker}
       />
