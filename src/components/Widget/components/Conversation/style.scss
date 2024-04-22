@@ -1,20 +1,23 @@
-@import 'common';
-@import 'variables/colors';
-@import 'animation';
+@import "common";
+@import "variables/colors";
+@import "animation";
 
 .rcw-conversation-container {
   border-radius: 10px;
   box-shadow: 0px 2px 10px 1px $grey-3;
   position: relative;
-  width: 600px;
-  height: 700px;
+  /* starting default sizing */
+  width: 350px;
+  height: 550px;
   display: flex;
   flex-direction: column;
 
   &.active {
     opacity: 1;
     transform: translateY(0px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
   }
 
   &.hidden {
@@ -22,7 +25,9 @@
     pointer-events: none;
     opacity: 0;
     transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
   }
 }
 
@@ -67,5 +72,14 @@
 @media screen and (max-width: 800px) {
   .rcw-conversation-container {
     @include conversation-container-fs;
+    min-width: calc(max(320px, 90%));
+    border-radius: 5px;
+    overflow: hidden;
+
+    &.active {
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 10px;
+    }
   }
 }

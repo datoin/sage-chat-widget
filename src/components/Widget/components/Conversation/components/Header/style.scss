@@ -1,8 +1,8 @@
-@import 'variables/colors';
-@import 'common';
+@import "variables/colors";
+@import "common";
 
 .rcw-conversation-container {
-  font-family: 'Open Sans', 'Helvetica', 'Arial', sans-serif;
+  font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
   .rcw-header {
     background-color: $purple-1;
     border-radius: 10px 10px 0 0;
@@ -10,25 +10,26 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    padding: 15px 0 25px;
+    padding: 15px 0;
   }
 
   .rcw-title {
     font-size: 24px;
     font-weight: 500;
     margin: 0;
-    padding: 10px 0;
+    padding: 5px 0;
   }
 
   .rcw-subtitle {
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
     margin: 0;
     padding: 0;
   }
 
   .rcw-close-button {
     display: none;
+    background-color: transparent;
   }
 
   .avatar {
@@ -41,7 +42,6 @@
 }
 
 .rcw-full-screen {
-
   .rcw-header {
     @include header-fs;
   }
@@ -60,9 +60,7 @@
 }
 
 @media screen and (max-width: 800px) {
-
   .rcw-conversation-container {
-
     .rcw-header {
       @include header-fs;
     }
