@@ -49,7 +49,6 @@ export default class App extends Component {
         disableRichTextInput={true}
         imagePreview
         handleSubmit={this.handleSubmit}
-        disableInput={true}
         resizable
         resizableProps={{heightOffset:105, widthOffset:35}}
         emojis

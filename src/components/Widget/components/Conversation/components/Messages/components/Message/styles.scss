@@ -1,5 +1,5 @@
-@import 'variables/colors';
-@import 'common';
+@import "variables/colors";
+@import "common";
 
 .rcw-message {
   margin: 10px;
@@ -23,8 +23,8 @@
   margin-left: auto;
 
   .rcw-message-text {
-    @include message-bubble($purple-2);
-
+    @include message-bubble($secondary);
+    margin-left: auto;
     white-space: pre-wrap;
     word-wrap: break-word;
   }
@@ -41,13 +41,14 @@
 
   .rcw-message-text {
     @include message-bubble($grey-2);
+    margin-right: auto;
   }
 }
 
 /* For markdown elements created with default styles */
 .rcw-message-text {
   font-size: 12px;
-  
+
   p {
     margin: 0;
   }

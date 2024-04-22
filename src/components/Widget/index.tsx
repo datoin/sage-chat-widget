@@ -11,6 +11,8 @@ type Props = {
   title: string;
   titleAvatar?: string;
   subtitle: string;
+  primaryColor?: string;
+  secondaryColor?: string;
   senderPlaceHolder: string;
   profileAvatar?: string;
   profileClientAvatar?: string;
@@ -43,6 +45,8 @@ function Widget({
   title,
   titleAvatar,
   subtitle,
+  primaryColor,
+  secondaryColor,
   senderPlaceHolder,
   profileAvatar,
   profileClientAvatar,
@@ -110,6 +114,8 @@ function Widget({
       title={title}
       titleAvatar={titleAvatar}
       subtitle={subtitle}
+      primaryColor={primaryColor}
+      secondaryColor={secondaryColor}
       senderPlaceHolder={senderPlaceHolder}
       profileAvatar={profileAvatar}
       profileClientAvatar={profileClientAvatar}

@@ -1,21 +1,23 @@
-import { useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import cn from 'classnames';
+import { useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import cn from "classnames";
 
-import { GlobalState, ResizableProps } from '@types';
-import { AnyFunction } from 'src/utils/types';
-import { openFullscreenPreview } from '../../store/actions';
+import { GlobalState, ResizableProps } from "@types";
+import { AnyFunction } from "src/utils/types";
+import { openFullscreenPreview } from "../../store/actions";
 
-import Conversation from './components/Conversation';
-import Launcher from './components/Launcher';
-import FullScreenPreview from './components/FullScreenPreview';
+import Conversation from "./components/Conversation";
+import Launcher from "./components/Launcher";
+import FullScreenPreview from "./components/FullScreenPreview";
 
-import './style.scss';
+import "./style.scss";
 
 type Props = {
   title: string;
   titleAvatar?: string;
   subtitle: string;
+  primaryColor?: string;
+  secondaryColor?: string;
   onSendMessage: AnyFunction;
   onToggleConversation: AnyFunction;
   senderPlaceHolder: string;
@@ -39,13 +41,15 @@ type Props = {
   showBadge?: boolean;
   resizable?: boolean;
   resizableProps?: ResizableProps;
-  emojis?: boolean
-}
+  emojis?: boolean;
+};
 
 function WidgetLayout({
   title,
   titleAvatar,
   subtitle,
+  primaryColor,
+  secondaryColor,
   onSendMessage,
   onToggleConversation,
   senderPlaceHolder,
@@ -69,67 +73,85 @@ function WidgetLayout({
   showBadge,
   resizable,
   resizableProps,
-  emojis
+  emojis,
 }: Props) {
   const dispatch = useDispatch();
-  const { disableInput, showChat, visible } = useSelector((state: GlobalState) => ({
-    showChat: state.behavior.showChat,
-    disableInput: state.behavior.disabledInput,
-    visible: state.preview.visible,
-  }));
+  const { disableInput, showChat, visible } = useSelector(
+    (state: GlobalState) => ({
+      showChat: state.behavior.showChat,
+      disableInput: state.behavior.disabledInput,
+      visible: state.preview.visible,
+    })
+  );
 
   const messageRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if(showChat) {
-      messageRef.current = document.getElementById('rcw-messages') as HTMLDivElement;
+    let root = document.documentElement;
+
+    if (root) {
+      // add primary & secondary colors as style variables
+      if (primaryColor) root.style.setProperty("--primary-color", primaryColor);
+      if (secondaryColor)
+        root.style.setProperty("--secondary-color", secondaryColor);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (showChat) {
+      messageRef.current = document.getElementById(
+        "rcw-messages"
+      ) as HTMLDivElement;
     }
     return () => {
       messageRef.current = null;
-    }
-  }, [showChat])
-  
-  const eventHandle = evt => {
-    if(evt.target && evt.target.className === 'rcw-message-img') {
-      const { src, alt, naturalWidth, naturalHeight } = (evt.target as HTMLImageElement);
+    };
+  }, [showChat]);
+
+  const eventHandle = (evt) => {
+    if (evt.target && evt.target.className === "rcw-message-img") {
+      const { src, alt, naturalWidth, naturalHeight } =
+        evt.target as HTMLImageElement;
       const obj = {
         src: src,
         alt: alt,
         width: naturalWidth,
         height: naturalHeight,
       };
-      dispatch(openFullscreenPreview(obj))
+      dispatch(openFullscreenPreview(obj));
     }
-  }
+  };
 
   /**
    * Previewer needs to prevent body scroll behavior when fullScreenMode is true
    */
   useEffect(() => {
     const target = messageRef?.current;
-    if(imagePreview && showChat) {
-      target?.addEventListener('click', eventHandle, false);
+    if (imagePreview && showChat) {
+      target?.addEventListener("click", eventHandle, false);
     }
 
     return () => {
-      target?.removeEventListener('click', eventHandle);
-    }
+      target?.removeEventListener("click", eventHandle);
+    };
   }, [imagePreview, showChat]);
 
   useEffect(() => {
-    document.body.setAttribute('style', `overflow: ${visible || fullScreenMode ? 'hidden' : 'auto'}`)
-  }, [fullScreenMode, visible])
+    document.body.setAttribute(
+      "style",
+      `overflow: ${visible || fullScreenMode ? "hidden" : "auto"}`
+    );
+  }, [fullScreenMode, visible]);
 
   return (
     <div
-      className={cn('rcw-widget-container', {
-        'rcw-full-screen': fullScreenMode,
-        'rcw-previewer': imagePreview,
-        'rcw-close-widget-container ': !showChat
-        })
-      }
+      className={cn("rcw-widget-container", {
+        "rcw-full-screen": fullScreenMode,
+        "rcw-previewer": imagePreview,
+        "rcw-close-widget-container ": !showChat,
+      })}
     >
-      {showChat &&
+      {showChat && (
         <Conversation
           title={title}
           subtitle={subtitle}
@@ -142,7 +164,7 @@ function WidgetLayout({
           disabledInput={disableInput}
           autofocus={autofocus}
           titleAvatar={titleAvatar}
-          className={showChat ? 'active' : 'hidden'}
+          className={showChat ? "active" : "hidden"}
           onQuickButtonClicked={onQuickButtonClicked}
           onTextInputChange={onTextInputChange}
           sendButtonAlt={sendButtonAlt}
@@ -151,23 +173,26 @@ function WidgetLayout({
           resizableProps={resizableProps}
           emojis={emojis}
         />
-      }
-      {customLauncher ?
-        customLauncher(onToggleConversation) :
-        !fullScreenMode &&
-        <Launcher
-          toggle={onToggleConversation}
-          chatId={chatId}
-          openLabel={launcherOpenLabel}
-          closeLabel={launcherCloseLabel}
-          closeImg={launcherCloseImg}
-          openImg={launcherOpenImg}
-          showBadge={showBadge}
+      )}
+      {customLauncher
+        ? customLauncher(onToggleConversation)
+        : !fullScreenMode && (
+            <Launcher
+              toggle={onToggleConversation}
+              chatId={chatId}
+              openLabel={launcherOpenLabel}
+              closeLabel={launcherCloseLabel}
+              closeImg={launcherCloseImg}
+              openImg={launcherOpenImg}
+              showBadge={showBadge}
+            />
+          )}
+      {imagePreview && (
+        <FullScreenPreview
+          fullScreenMode={fullScreenMode}
+          zoomStep={zoomStep}
         />
-      }
-      {
-        imagePreview && <FullScreenPreview fullScreenMode={fullScreenMode} zoomStep={zoomStep} />
-      }
+      )}
     </div>
   );
 }
