@@ -4,6 +4,20 @@
 
 Forked from [@ryaneewx/react-chat-widget](https://github.com/ryaneewx/react-chat-widget), original source code from [@Wolox/react-chat-widget](https://github.com/Wolox/react-chat-widget).
 
+## Build Flow:
+- Make any local changes (Make sure to test locally with `npm run start`)
+- Do a version bump accordingly
+- Generate the build files using `npm run build`
+- Then push all the files into the repo
+- Create a release with the version tag
+- Use the new version tagged release as the package source 
+```
+
+  npm install https://github.com/ihassan-noon/sage-chat-widget/releases/tag/v[version]#:~:text=Source%20code,(zip)
+  yarn add https://github.com/ihassan-noon/sage-chat-widget/releases/tag/v[version]#:~:text=Source%20code,(zip)
+
+```
+
 
 ## Changelog (v3.4.0)
 
