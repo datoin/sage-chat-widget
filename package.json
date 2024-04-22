@@ -1,10 +1,10 @@
 {
-  "name": "@ryaneewx/react-chat-widget",
+  "name": "@ihassan-noon/sage-chat-widget",
   "version": "3.4.1",
   "description": "Chat web widget for React apps",
   "main": "lib/index.js",
-  "repository": "git@github.com:ryaneewx/react-chat-widget.git",
-  "author": "Ryan Ee <ryanee@gmail.com>",
+  "repository": "git@github.com:ihassan-noon/sage-chat-widget.git",
+  "author": "Ryan Ee <ryanee@gmail.com> & Martín Callegari <martin.callegari@wolox.com.ar>",
   "license": "MIT",
   "types": "./lib/index.d.ts",
   "scripts": {

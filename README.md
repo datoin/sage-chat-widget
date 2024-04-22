@@ -1,6 +1,8 @@
-# React Chat Widget
+# Sage [React] Chat Widget
 [![circle-ci](https://img.shields.io/circleci/project/github/Wolox/react-chat-widget.svg)](https://circleci.com/gh/Wolox/react-chat-widget)
 [![npm](https://img.shields.io/npm/v/react-chat-widget.svg)](https://www.npmjs.com/package/@ryaneewx/react-chat-widget)
+
+Forked from [@ryaneewx/react-chat-widget](https://github.com/ryaneewx/react-chat-widget), original source code from [@Wolox/react-chat-widget](https://github.com/Wolox/react-chat-widget).
 
 
 ## Changelog (v3.4.0)
