@@ -42,7 +42,6 @@
     "@types/babel__generator": "^7.6.5",
     "@types/babel__template": "^7.4.2",
     "@types/babel__traverse": "^7.20.2",
-    "@types/emoji-mart": "^3.0.10",
     "@types/estree": "^1.0.2",
     "@types/istanbul-lib-report": "^3.0.1",
     "@types/jest": "^29.5.5",
