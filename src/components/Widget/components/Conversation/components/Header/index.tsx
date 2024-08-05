@@ -12,7 +12,8 @@ type Props = {
 
 function Header({ title, subtitle, toggleChat, showCloseButton, titleAvatar }: Props) {
   return (
-    <div className="rcw-header">
+    <>
+    <div className="rcw-header">      
       {showCloseButton &&
         <button className="rcw-close-button" onClick={toggleChat}>
           <img src={close} className="rcw-close" alt="close" />
@@ -24,6 +25,11 @@ function Header({ title, subtitle, toggleChat, showCloseButton, titleAvatar }: P
       </p>
       <span className="rcw-subtitle">{subtitle}</span>
     </div>
+
+    <div className="rcw-header-custom">      
+      <h1>Custom Header component will be pushed here</h1>
+    </div>
+    </>
   );
 }
 
